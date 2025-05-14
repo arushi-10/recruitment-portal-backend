@@ -7,7 +7,7 @@ const makeFinalDecision = async (req, res) => {
     if (!interview) return res.status(404).json({ message: "Interview not found" });
 
     interview.finalDecision = "offered";
-    interview.offerLetter = req.file ? req.file.filename : null;
+    interview.offerLetter = req.file ? req.file.path : null;
     await interview.save();
 
     res.status(200).json({ message: "Offer made to candidate", interview });

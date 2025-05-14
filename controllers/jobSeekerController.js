@@ -22,7 +22,7 @@ if (!skills || !experience || !education || !contact) {
  // Check if resume was uploaded during registration
 
  const resumeFromRegister = existingProfile?.resume || null;
- const resumeFile = req.file ? req.file.filename : null;
+ const resumeFile = req.file ? req.file.path : null;
  const finalResume = resumeFile || resumeFromRegister;
 
  // If resume was not uploaded at registration and not uploaded now
@@ -51,7 +51,7 @@ if (!skills || !experience || !education || !contact) {
 const updateProfile = async (req, res) => {
   try {
     const { skills, experience, education, contact } = req.body;
-    const resume = req.file ? req.file.filename : undefined;
+    const resume = req.file ? req.file.path : undefined;
 
     const updated = await JobSeeker.findOneAndUpdate(
       { userId: req.user._id },

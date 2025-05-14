@@ -91,14 +91,14 @@ async (req, res) => {
                   email: req.body.contactPersonEmail,
                   phone: req.body.contactPersonPhone,
                 },
-                verificationDocs:req.files?.verificationDocs?.map((doc)=>doc.filename) || [],
+                verificationDocs:req.files?.verificationDocs?.map((doc)=>doc.path) || [],
                 // Include common User fields
                 ...user._doc
               });
             await client.save();
         } else if (role === "jobseeker") {
             const jobSeeker = new JobSeeker({ userId: user._id,
-                resume:req.files?.resumeFile?.[0]?.filename||null,...user._doc });
+                resume:req.files?.resumeFile?.[0]?.path||null,...user._doc });
             await jobSeeker.save();
         }
        // Return role-specific response message
